@@ -14,6 +14,6 @@ public class FirstPizza {
         driver.get("https://www.pizzatempo.by/");
         String title = driver.getTitle();
         Assert.assertTrue(title.equals("Заказ и доставка пиццы на дом в Минске - «Пицца Темпо»"));
-        driver.quit(); //to close
+        //driver.quit(); //to close
     }
 }
