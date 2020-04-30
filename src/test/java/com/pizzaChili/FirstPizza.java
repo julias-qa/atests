@@ -11,7 +11,7 @@ public class FirstPizza {
     public ChromeDriver driver;
 
     @Before
-    public void setUp(){
+    public void startIt(){
         System.setProperty("webdriver.chrome.driver", "C:/Java/chromedriver.exe");
         driver = new ChromeDriver();
         System.out.println("show start");
