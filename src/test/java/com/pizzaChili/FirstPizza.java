@@ -1,34 +1,38 @@
 package com.pizzaChili;
-
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class FirstPizza {
+class FirstPizza {
 
-    public ChromeDriver driver;
-
-    @Before
-    public void startIt(){
+    static ChromeDriver driver;
+    @BeforeAll
+    static void startIt() {
         System.setProperty("webdriver.chrome.driver", "C:/Java/chromedriver.exe");
         driver = new ChromeDriver();
         System.out.println("show start");
     }
 
     @Test
-    public void FirstPizza() {
-
+    @Order(3)
+    void firstPizza() {
+//        driver.manage().window().setSize(new Dimension(500,500));
         driver.get("https://www.pizzatempo.by/");
         String title = driver.getTitle();
-        Assert.assertTrue(title.equals("Заказ и доставка пиццы на дом в Минске - «Пицца Темпо»"));
+        Assertions.assertEquals("Заказ и доставка пиццы на дом в Минске - «Пицца Темпо»", title);
     }
 
-    @After
-    public void stopIt() {
+    @Test
+    @Order(1)
+    void firstPizza2() {
+        driver.manage().window().maximize();
+        driver.get("https://www.pizzatempo.by/");
+    }
+
+    @AfterEach
+    void stopIt() {
         driver.quit();
         System.out.println("show stop");
     }
+
 
 }
