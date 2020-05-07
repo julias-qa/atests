@@ -3,7 +3,6 @@ import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.Select;
 
 class FirstPizza {
 
@@ -24,56 +23,57 @@ class FirstPizza {
         Assertions.assertEquals("Заказ и доставка пиццы на дом в Минске - «Пицца Темпо»", title);
         driver.manage().window().maximize();
         driver.get("https://www.pizzatempo.by/");
-        WebElement el = driver.findElement(By.linkText("Регистрация"));
-        el.click();
-        System.out.println("registration");
+        driver.manage().deleteAllCookies();
 
-        WebElement Email = driver.findElement(By.name("email"));
-        Email.sendKeys("testuser@gmail.com");
+        driver.findElement(By.xpath("//a[@href='https://www.pizzatempo.by/registration/']")).click();
 
-        WebElement Пароль = driver.findElement(By.name("pass"));
-        Пароль.sendKeys("testpass20");
+        WebElement Email = driver.findElement(By.xpath("//input[@name='email']")); //xpath
+        Email.sendKeys("sojoye3850@box4mls.com");
 
-        WebElement Повторите_пароль = driver.findElement(By.name("repass"));
-        Повторите_пароль.sendKeys("testpass20");
+        WebElement Password1 = driver.findElement(By.xpath("//input[@name='pass']")); //xpath
+        Password1.sendKeys("testpass20");
 
-        WebElement Контактное_лицо = driver.findElement(By.name("fio"));
-        Контактное_лицо.sendKeys("John Smith");
+        WebElement Password2 = driver.findElement(By.xpath("//input[@name='repass']")); //xpath
+        Password2.sendKeys("testpass20");
 
-        WebElement Контактный_телефон = driver.findElement(By.name("phone"));
-        Контактный_телефон.sendKeys("+903 23 507 49 98");
+        WebElement Person = driver.findElement(By.xpath("//input[@name='fio']")); //xpath
+        Person.sendKeys("John Smith");
 
-        WebElement Пол = driver.findElement(By.name("sex"));
-        Пол.click();
+        WebElement Phone = driver.findElement(By.xpath("//input[@name='phone']"));
+        Phone.click();
+        Phone.sendKeys("903 23 507 49 98");
 
-        Select Возраст = new Select(driver.findElement(By.name("age")));
-        Возраст.selectByIndex(2);
+        WebElement Gender = driver.findElement(By.xpath("//input[@name='sex']"));
+        Gender.click();
 
-        Select Род_Занятий = new Select(driver.findElement(By.name("occupation")));
-        Род_Занятий.selectByIndex(7);
+        driver.findElement(By.xpath("//select[@name='age']")).click();
+        driver.findElement(By.xpath("//select//option[@value='26-35']")).click();
 
-        WebElement Подписка = driver.findElement(By.name("subscribe"));
-        Подписка.click();
-        System.out.println("unchecked");
+        driver.findElement(By.xpath("//select[@name='occupation']")).click();
+        driver.findElement(By.xpath("//select//option[@value='Служащий']")).click();
 
-        WebElement Street = driver.findElement(By.name("street"));
+        WebElement Subscribe = driver.findElement(By.xpath("//input[@name='subscribe']"));
+        Subscribe.click();
+
+        WebElement Street = driver.findElement(By.xpath("//input[@name='street']"));
         Street.sendKeys("Bakerstreet");
 
-        WebElement House = driver.findElement(By.name("house"));
+        WebElement House = driver.findElement(By.xpath("//input[@name='house']"));
         House.sendKeys("21b");
 
-        WebElement Room = driver.findElement(By.name("room"));
+        WebElement Room = driver.findElement(By.xpath("//input[@name='room']"));
         Room.sendKeys("1");
 
-        WebElement Porch = driver.findElement(By.name("porch"));
+        WebElement Porch = driver.findElement(By.xpath("//input[@name='porch']"));
         Porch.sendKeys("10");
 
-        WebElement Floor = driver.findElement(By.name("floor"));
+        WebElement Floor = driver.findElement(By.xpath("//input[@name='floor']"));
         Floor.sendKeys("8");
 
-        el = driver.findElement(By.name("form_submit"));
-        el.click();
-        System.out.println("Reg is done");
+        driver.findElement(By.xpath("//button[@name='form_submit']")).click();
+
+        WebElement Text = driver.findElement(By.xpath("//div[@class='content']"));
+                Text.getText().contains("Вы успешно зарегистрированы.");
 
     }
 
